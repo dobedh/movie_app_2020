@@ -1,51 +1,52 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-function Food({ name, picture, rating }){
-  return ( 
+class App extends React.Component {
+  constructor(props){
+    super(props);
+    console.log('hello')
+  }
+
+  componentDidMount(){
+    console.log('compoenet rendered');
+  }
+
+  componentDidUpdate(){
+    console.log('I just updated');
+  }
+
+  componentWillUnmount(){
+    console.log('Goodbye, cruel world')
+  }
+
+  state = {
+    count : 0
+  };
+  
+  add = () => {
+    console.log('add')
+    this.setState(current => ({
+    count: current.count + 1
+    }))
+  };
+
+  minus = () => {
+    console.log('minus')
+    this.setState(current => ({
+      count: current.count - 1
+      }))
+  };
+
+  render() {
+    console.log("I'm rendering")
+    return (
     <div>
-      <h2>I like { name }</h2>
-      <h2>{rating}/5.0</h2>
-      <img src={picture} alt={name}/>
+      <h1>The number is : {this.state.count} </h1>
+      <button onClick={this.add}>Add</button>
+      <button onClick={this.minus}>Minus</button>
     </div>
     )
-}
-
-const foodILike = [
-  {
-    id : 1,
-    name : 'pizza',
-    image : 'https://www.recipetineats.com/wp-content/uploads/2020/05/Pepperoni-Pizza_7.jpg',
-    rating : 5
-  },
-  {
-    id : 2,
-    name : 'samgyeopsal',
-    image : 'https://image.chosun.com/sitedata/image/201902/24/2019022401106_0.jpg',
-    rating : 4.5
-  },
-  {
-    id : 3,
-    name : 'kimchi',
-    image : 'https://www.bgw.kr/wp-content/uploads/2019/12/%EC%88%98%EC%9E%85%EA%B9%80%EC%B9%98.png',
-    rating : 3
   }
-];
 
-function App() {
-  return ( 
-  <div>
-  {foodILike.map(dish => (
-  <Food key={dish.id} name={dish.name} picture={dish.image} rating={dish.rating}/>
-  ))}
-  </div>
-  )
 }
-
-Food.propTypes = {
-  name : PropTypes.string.isRequired,
-  picture : PropTypes.string.isRequired,
-  rating : PropTypes.string.isRequired,
-};
 
 export default App;
